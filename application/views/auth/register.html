@@ -1,13 +1,54 @@
 {% extends 'common/base.html' %}
 
 {% block title %}Register{% endblock %}
+{% block head %}
+<style>
+.form-auth {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+</style>
+{% endblock %}
 
 {% block content %}
-  <form method="post">
-    <label for="username">Username</label>
-    <input name="username" id="username" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
-    <input type="submit" value="Register">
+<main class="form-auth">
+  <form id="Form_Auth" method="post">
+    <h1 class="h3 mb-3 fw-normal text-center">Register</h1>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="Input_Username" name="username" placeholder="Username" required>
+      <label for="Input_Username">Username</label>
+    </div>
+
+    <div class="form-floating">
+      <input type="password" class="form-control" id="Input_Password" name="password" placeholder="Password" required>
+      <label for="Input_Password">Password</label>
+    </div>
+
+    <div class="form-floating">
+      <input type="password" class="form-control" id="Input_Password_Retype" placeholder="Retype Password" required>
+      <label for="Input_Password_Retype">Retype Password</label>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
   </form>
+</main>
+{% endblock %}
+
+{% block js %}
+<script>
+function checkPassword(event) {
+  if(document.getElementById("Input_Password").value !== document.getElementById("Input_Password_Retype").value) {
+    console.log("asd");
+    alert("Your passwords do not match");
+    event.preventDefault();
+  }
+  
+}
+
+let authForm = document.getElementById("Form_Auth");
+authForm.addEventListener("submit", checkPassword)
+</script>
 {% endblock %}
