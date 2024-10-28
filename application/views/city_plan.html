@@ -8,79 +8,18 @@
     <p>Pick a city you want to travel to and then fill out the data to generate a personalized itinerary.</p>
 
     <div class="row row-cols-1 row-cols-md-4 g-4">
+        {% for city in data.cities %}
         <div class="col">
             <div class="card">
-            <img src="/img/logo.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-            <img src="/img/logo.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
+                <img src="{{ city['img'] }}" class="card-img-top" alt="Scennic picture of {{ city['name'] }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ city['name'] }}, {{city['country']}}</h5>
+                    <p class="card-text">{{ city['desc'] }}</p>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SurveyModal" data-bs-city="city['name']">Plan!</button>
+                </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card">
-            <img src="/img/logo.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-            </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-            <img src="/img/logo.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-            <img src="/img/logo.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-            <img src="/img/logo.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-            <img src="/img/logo.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-            <img src="/img/logo.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Poland</h5>
-                <p class="card-text">Experience a land of wonder!</p>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SurveyModal" data-bs-city="Poland">Plan!</button>
-            </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 
     <!-- MODAL-->
