@@ -9,3 +9,7 @@
             text-align: center;
     }
 }
+
+main {
+    padding: 2%; /* Add some spacing between the border of the page*/
+}
