@@ -24,3 +24,7 @@ class Router:
         #Plan
         from application.routes.ApplicationRouter import CityPlanRouter
         app.register_blueprint(CityPlanRouter, url_prefix="/")
+
+        from application.routes.ApplicationRouter import ItineraryRouter
+        app.register_blueprint(ItineraryRouter, url_prefix="/")
+        
