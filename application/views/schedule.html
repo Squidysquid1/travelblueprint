@@ -10,7 +10,7 @@
                 <h5 class="mb-4 text-info aos-init aos-animate" data-aos="fade-up">Schedule and Agenda</h5>
                 <div class="nav nav-pills flex-column aos-init aos-animate" id="myTab" role="tablist" data-aos="fade-up">
                     {% for day in data.days %}
-                    <button class="nav-link px-4 text-start {% if loop.index==1 %}mb-3 active{% endif %}" id="d{{loop.index}}-tab" data-bs-toggle="tab" data-bs-target="#day{{loop.index}}" type="button" role="tab" aria-controls="day{{loop.index}}" aria-selected={% if loop.index==1 %}"true"{% else %}"false" tabindex="-1"{% endif %}>
+                    <button class="nav-link px-4 text-start {% if loop.index==1 %}active{% endif %}" id="d{{loop.index}}-tab" data-bs-toggle="tab" data-bs-target="#day{{loop.index}}" type="button" role="tab" aria-controls="day{{loop.index}}" aria-selected={% if loop.index==1 %}"true"{% else %}"false" tabindex="-1"{% endif %}>
                         <span class="d-block fs-5 fw-bold">Day {{loop.index}}</span>
                     </button>
                     {% endfor %}
