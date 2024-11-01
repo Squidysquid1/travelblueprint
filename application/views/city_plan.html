@@ -37,12 +37,20 @@
             <form action="/create-itinerary" id="Form_createItinerary"  method="post">
               <div class="mb-3">
                 <label for="survey-city" class="col-form-label">City:</label>
-                <input type="text" class="form-control" id="survey-city" disabled readonly>
+                <input type="text" class="form-control" id="survey-city" name="city" readonly>
               </div>
 
               <div class="mb-3">
                 <label for="survey-days" class="col-form-label">How many days do you want to travel?(1-7):</label>
-                <input type="text" class="form-control" id="survey-days">
+                <select class="form-select" id="survey-days" name="days">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                </select>
               </div>
 
               
@@ -50,10 +58,10 @@
               <div class="mb-3">
                 <label for="message-text" class="col-form-label">Where do you prefer to live?</label>
                 <br>
-                <input type="radio" class="btn-check" name="livingPreference" id="survey-living-city" autocomplete="off" value="city">
+                <input type="radio" class="btn-check" name="living_preference" id="survey-living-city" autocomplete="off" value="city">
                 <label class="btn btn-info" for="survey-living-city">City</label>
 
-                <input type="radio" class="btn-check" name="livingPreference" id="survey-living-country" autocomplete="off" value="country">
+                <input type="radio" class="btn-check" name="living_preference" id="survey-living-country" autocomplete="off" value="country">
                 <label class="btn btn-info" for="survey-living-country">Country</label>
               </div>
 
@@ -69,8 +77,8 @@
                   <label class="form-check-label" for="check2">Relaxing</label>
                 </div>
                 <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="check3" name="check_" value="1">
-                  <label class="form-check-label" for="check3">Relaxing</label>
+                  <input type="checkbox" class="form-check-input" id="check3" name="check_tours" value="1">
+                  <label class="form-check-label" for="check3">Guided Tours</label>
                 </div>
               </div>
 
