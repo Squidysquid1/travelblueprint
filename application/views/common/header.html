@@ -20,10 +20,10 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     {% if g.user %}
-                    <div>{{ g.user['username'] }}</div>
-                    <a href="{{ url_for('auth.logout') }}" class=" nav-link">Log Out</a>
+                    <a href="{{ url_for('account_controller.index') }}" class="nav-link">{{ g.user['username'] }} - Account</a>
+                    <a href="{{ url_for('auth.logout') }}" class="nav-link">Log Out</a>
                     {% else %}
-                    <a href="{{ url_for('auth.login') }}" class=" nav-link">Log In</a>
+                    <a href="{{ url_for('auth.login') }}" class="nav-link">Log In</a>
                     {% endif %}
                 </li>
             </ul>
