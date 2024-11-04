@@ -4,6 +4,7 @@ from application.controllers.ScheduleController import ScheduleController
 from application.controllers.FaqController import FaqController
 from application.controllers.CityPlanController import CityPlanController
 from application.controllers.ItineraryController import ItineraryController
+from application.controllers.AccountController import AccountController
 
 routes = []
 
@@ -27,3 +28,7 @@ ItineraryRouter = Blueprint('itinerary_controller', __name__)
 ItineraryRouter.route('/view-itinerary', methods=['GET'])(ItineraryController.index)
 ItineraryRouter.route('/create-itinerary', methods=['POST'])(ItineraryController.createItinerary)
 routes.append(ItineraryRouter)
+
+AccountRouter = Blueprint('account_controller', __name__)
+AccountRouter.route('/account', methods=['GET'])(AccountController.index)
+routes.append(AccountRouter)
