@@ -34,7 +34,7 @@
                                         {{event.information}}
                                     </p>
                                 </div>
-                                <button type="button" class="btn btn-info">Map</button>
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#MapModal" data-bs-map-query="food near me">Map</button>
                             </li>
                             {% endfor %}
                         </ul>
@@ -44,5 +44,48 @@
             </div>
         </div>
     </div>
+
+    <!-- MODAL-->
+
+    <div class="modal fade" id="MapModal" tabindex="-1" aria-labelledby="MapModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+          <div class="modal-content">
+  
+            <div class="modal-header">
+              <h5 class="modal-title" id="MapModalLabel">Directions</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+  
+            <div class="modal-body">
+              <h1>MAP GOES HERE EVENTUALLY</h1>
+            </div>
+  
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
 </main>
+{% endblock %}
+
+{% block js %}
+<script>
+    var mapModal = document.getElementById('MapModal');
+    mapModal.addEventListener('show.bs.modal', function (event) {
+    // Button that triggered the modal
+    var button = event.relatedTarget
+    // Extract info from data-bs-* attributes
+    //var city = button.getAttribute('data-bs-city')
+    // If necessary, you could initiate an AJAX request here
+    // and then do the updating in a callback.
+    //
+    // Update the modal's content.
+    //var modalCity = surveyModal.querySelector('#survey-city')
+
+    //modalTitle.textContent = 'New message to ' + recipient
+    //modalCity.value = city
+});
+
+</script>
 {% endblock %}
