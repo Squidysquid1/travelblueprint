@@ -17,11 +17,13 @@
     {% include 'common/header.html' %}
     {% with messages = get_flashed_messages() %}
       {% if messages %}
-        <ul class="flashes">
+        <div>
         {% for message in messages %}
-          <li>{{ message }}</li>
+        <div class="alert alert-info" role="alert">
+          {{ message }}
+        </div>
         {% endfor %}
-        </ul>
+        </div>
       {% endif %}
     {% endwith %}
 
