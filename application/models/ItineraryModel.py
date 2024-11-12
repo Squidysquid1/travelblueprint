@@ -5,9 +5,9 @@
 def getItinerarys(userID):
     pass
 
-def getItinerary(code):
+def getItinerary(uuid):
     """
-    Gets an itinerery from a hash
+    Gets an itinerery from a uuid
 
     :param code: hash of an itinerary
     :return: List of each day for a schedule, or if a code is not found then return None
@@ -15,7 +15,7 @@ def getItinerary(code):
 
     days = []
 
-    if code is 123:
+    if uuid is 123:
         day1Schedule = [dict(time="9:00 AM - 10:00 AM", title="Registration and Coffee", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
                         dict(time="10:00 AM - 11:00 AM", title="Explore City", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
                         dict(time="11:00 AM - 12:30 PM", title="Get rental car", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),

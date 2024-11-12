@@ -36,6 +36,14 @@ Please refer to the following for info for deploying a flask application.
 ### Configuring From Files
 Configure in config.py file
 
+### Test admin user
+> [!NOTE] 
+> Admin users have limited functionaility in its current state.
+
+```
+Username: test
+Password: test
+```
 
 ## Flask Application Structure 
 ```
