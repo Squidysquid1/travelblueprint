@@ -10,7 +10,7 @@ class Router:
         app.register_blueprint(Auth.bp)
 
         # Application routes
-        from application.routes.ApplicationRouter import routes
+        from application.ApplicationRouter import routes
 
         for route in routes:
             app.register_blueprint(route)
