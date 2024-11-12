@@ -1,23 +1,12 @@
+from framework.Database import get_db
+
 def getCitys():
-    """
-    DROP TABLE IF EXISTS `City`;
-    CREATE TABLE `City` (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(255),
-    country VARCHAR(255), -- Could make country a separate table
-    img VARCHAR(255),
-    desc TEXT
-    );
-    """
-    cities = []
-    cities.append( dict(name = "Krakow", country="Poland", img = "/img/countries/poland/krakow/card_icon.jpg", desc ="Experience a land of wonder!") )
-    cities.append( dict(name = "Warsaw", country="Poland", img = "/img/countries/poland/warsaw/card_icon.jpg", desc ="Experience a land of wonder!") )
-    cities.append( dict(name = "Yosemite", country="USA", img = "/img/countries/usa/yosemite/card_icon.jpg", desc ="Experience a land of wonder!") )
-    cities.append( dict(name = "London", country="United Kingdom", img = "/img/countries/united_kingdom/london/card_icon.jpg", desc ="Experience a land of wonder!") )
-    cities.append( dict(name = "Berlin", country="Germany", img = "/img/countries/germany/berlin/card_icon.webp", desc ="Experience a land of wonder!") )
-    cities.append( dict(name = "Oslo", country="Norway", img = "/img/countries/norway/oslo/card_icon.png", desc ="Experience a land of wonder!") )
-    cities.append( dict(name = "Paris", country="France", img = "/img/countries/france/paris/card_icon.jpg", desc ="Experience a land of wonder!") )
-    cities.append( dict(name = "Rome", country="Italy", img = "/img/countries/italy/rome/card_icon.jpg", desc ="Experience a land of wonder!") )
+    db = get_db()
+
+    execute = db.execute("SELECT * FROM City;")
+
+    cities = [dict(row) for row in execute.fetchall()]
+
     return cities
 
 def getHotels(cityName):

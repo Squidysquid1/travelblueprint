@@ -11,7 +11,7 @@ from flask import url_for
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 
-from .Database import get_db
+from framework.Database import get_db
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
 
@@ -64,8 +64,8 @@ def register():
         if error is None:
             try:
                 db.execute(
-                    "INSERT INTO User (username, password) VALUES (?, ?)",
-                    (username, generate_password_hash(password)),
+                    "INSERT INTO User (username, password, isAdmin) VALUES (?, ?, ?)",
+                    (username, generate_password_hash(password), 0),
                 )
                 db.commit()
             except db.IntegrityError:
