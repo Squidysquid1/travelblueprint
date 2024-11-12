@@ -1,6 +1,7 @@
 # TravelBlueprint
 > [!WARNING]  
 > THIS PRODUCT IS IN EARLY ALPHA AND SHOULD NOT BE USED IN PRODUCTION
+
 An easy to use travel itinerary generator
 
 ## Installation
@@ -14,21 +15,20 @@ $ pip install -r requirements.txt
 ## Run Flask
 ### Run flask for develop
 ```
+#Initilize Database
+$ flask init-db
+#Run Application
 $ flask run --debug
 ```
 In flask, Default port is `5000`
 
 ### Run flask for production
-App has not been tested in production and not yet ready for widespread use as still in alpha
+> [!IMPORTANT]  
+> App has not been tested in production and not yet ready for widespread use as still in alpha.
 
-[](https://flask.palletsprojects.com/en/stable/deploying/)
+Please refer to the following for info for deploying a flask application.
 
-** Run with gunicorn **
-
-```
-$ gunicorn -w 4 -b 127.0.0.1:5000 run:app
-
-```
+[https://flask.palletsprojects.com/en/stable/deploying/](https://flask.palletsprojects.com/en/stable/deploying/)
 
 
 ## Flask Configuration
@@ -38,25 +38,45 @@ Configure in config.py file
 
 
 ## Flask Application Structure 
-* update with my tree left in here as example
 ```
 .
-|──────application/
-| |────api/
-| | |────Controller/
-| | |────Model/
-| | |────View/
-| |────Framework/
-| |────util/
-|──────run.py
-|──────tests/
-
+├── application
+│   ├── controllers
+│   │   ├── AccountController.py
+│   │   ├── CityPlanController.py
+│   │   ├── FaqController.py
+│   │   ├── HomeController.py
+│   │   └── ItineraryController.py
+│   ├── models
+│   │   ├── ItineraryModel.py
+│   │   ├── LocationModel.py
+│   │   └── UserModel.py
+│   ├── routes
+│   │   └── ApplicationRouter.py
+│   ├── static
+│   └── views
+│       ├── auth
+│       │   ├── login.html
+│       │   └── register.html
+│       ├── city_plan.html
+│       ├── common
+│       │   ├── base.html
+│       │   ├── footer.html
+│       │   └── header.html
+│       ├── construction.html
+│       ├── faq.html
+│       ├── home.html
+│       └── schedule.html
+├── app.py
+├── config.py
+├── framework
+│   ├── Auth.py
+│   ├── Database.py
+│   ├── Router.py
+│   └── schema.sql
+├── README.md
+└── requirements.txt
 ```
-
-
- 
-
-
 
 ## Reference
 
@@ -64,7 +84,7 @@ Offical Website
 
 - [Flask](https://flask.palletsprojects.com/en/stable/)
 
--[Flask - Tutorial](https://flask.palletsprojects.com/en/stable/tutorial/)
+- [Flask - Tutorial](https://flask.palletsprojects.com/en/stable/tutorial/)
 
-- [gunicorn](http://gunicorn.org/)
+- [gunicorn - Can be used for production](http://gunicorn.org/)
 
