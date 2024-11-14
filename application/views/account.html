@@ -1,0 +1,24 @@
+{% extends 'common/base.html' %}
+
+{% block title %}TravelBlueprint - Account{% endblock %}
+
+{% block content %}
+<main>
+    <h1> Welcome {{ g.user['username'] }}</h1>
+
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        {% for itinerary in data.itineraries %}
+        <div class="col">
+            <div class="card">
+                <img src="{{ itinerary['img'] }}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Itinerary {{ loop.index }}</h5>
+                    <p class="card-text">{{ itinerary.uuid4 }}</p>
+                    <a href="{{ url_for('itinerary_controller.index', code=itinerary.uuid4) }}" class="btn btn-primary stretched-link">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

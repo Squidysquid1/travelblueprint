@@ -39,7 +39,7 @@ def load_logged_in_user():
         g.user = None
     else:
         g.user = (
-            get_db().execute("SELECT * FROM User WHERE id = ?", (user_id,)).fetchone()
+            get_db().execute("SELECT * FROM User WHERE user_id = ?", (user_id,)).fetchone()
         )
 
 
@@ -64,7 +64,7 @@ def register():
         if error is None:
             try:
                 db.execute(
-                    "INSERT INTO User (username, password, isAdmin) VALUES (?, ?, ?)",
+                    "INSERT INTO User (username, password, is_admin) VALUES (?, ?, ?)",
                     (username, generate_password_hash(password), 0),
                 )
                 db.commit()
@@ -101,7 +101,7 @@ def login():
         if error is None:
             # store the user id in a new session and return to the index
             session.clear()
-            session["user_id"] = user["id"]
+            session["user_id"] = user["user_id"]
             return redirect(url_for("home_controller.index"))
 
         print(error)
