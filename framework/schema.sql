@@ -29,7 +29,7 @@ CREATE TABLE `Itinerary`(
   userID INTEGER,
   cityID INTEGER,
   hotelID INTEGER,
-  hash VARCHAR(255) NOT NULL, -- Might need to be larger depending on what hashing algo we intend on using
+  uuid4 VARCHAR(255) NOT NULL,
   FOREIGN KEY (userID) REFERENCES User(id),
   FOREIGN KEY (cityID) REFERENCES City(id),
   FOREIGN KEY (hotelID) REFERENCES Hotel(id)
@@ -39,8 +39,8 @@ CREATE TABLE `ItineraryDetail` (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   itineraryID INTEGER,
   siteID INTEGER,
-  date NUMERIC, -- mm/dd/yyyy
-  time INTEGER, -- possibly Epoch of utc
+  day INTEGER,
+  time VARCHAR(255),
   FOREIGN KEY (itineraryID) REFERENCES Itinerary(id),
   FOREIGN KEY (siteID) REFERENCES Hotel(id)
 );
@@ -78,7 +78,7 @@ CREATE TABLE FAQ (
 
 -- BEGIN TEST ADMIN USER
 INSERT INTO User
-VALUES (1,"scrypt:32768:8:1$vGE1pDr5F2xkKLhq$e8fa50a3c0a9fd7e3f06cdf5dc732cf4eac3592bad75cbdc6f79379ef558fdabbda698522807b9ab01c5ee5bc8ba05d4b40dbc47d9efbad52f3ca6ab4dbb83a8",1);
+VALUES (1, "test", "scrypt:32768:8:1$vGE1pDr5F2xkKLhq$e8fa50a3c0a9fd7e3f06cdf5dc732cf4eac3592bad75cbdc6f79379ef558fdabbda698522807b9ab01c5ee5bc8ba05d4b40dbc47d9efbad52f3ca6ab4dbb83a8",1);
 -- END TEST ADMIN USER
 
 -- BEGIN FAQ TEST DATA
@@ -175,34 +175,107 @@ VALUES (16, 8, 'Hotel 2', "country", '#', 0, 'insert desc');
 -- END Hotel TEST DATA
 
 -- BEGIN Site TEST DATA
--- category type: Exploring, Relaxing, Guided Tours 
+
 -- Krakow
 INSERT INTO Site
-VALUES (1, 1, 'Auschwitz', "Guided Tours", 'https://www.auschwitz.org/en/visiting/', 180, 0, 'insert desc');
-INSERT INTO Site
-VALUES (2, 1, 'Wieliczka Salt Mine Tour', "Guided Tours", 'https://www.tripadvisor.com/AttractionProductReview-g274772-d11452686-Wieliczka_Salt_Mine_Tour_from_Krakow_with_Ticket_Pickup_Options-Krakow_Lesser_Pola.html', 180, 0, 'insert desc');
-INSERT INTO Site
-VALUES (3, 1, 'Market Square', "Exploring", 'https://visitkrakow.com/krakows-market-square/', 120, 0, 'insert desc');
-
+VALUES
+(1, 1, 'Market Square', "Exploring", 'https://visitkrakow.com/krakows-market-square/', 120, 0, 'insert desc'),
+(2, 1, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
+(3, 1, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc'),
+(4, 1, 'Auschwitz', "Guided Tours", 'https://www.auschwitz.org/en/visiting/', 180, 0, 'insert desc'),
+(5, 1, 'Wieliczka Salt Mine Tour', "Guided Tours", 'https://www.tripadvisor.com/AttractionProductReview-g274772-d11452686-Wieliczka_Salt_Mine_Tour_from_Krakow_with_Ticket_Pickup_Options-Krakow_Lesser_Pola.html', 180, 0, 'insert desc'),
+(6, 1, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc'),
+(7, 1, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc'),
+(8, 1, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc');
 --Warsaw
-
+INSERT INTO Site
+VALUES
+(9, 2, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
+(10, 2, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
+(11, 2, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc'),
+(12, 2, 'Site4 Name', 'Guided Tours', '#', 180, 0, 'insert desc'), 
+(13, 2, 'Site5 Name', 'Guided Tours', '#', 180, 0, 'insert desc'), 
+(14, 2, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc'),
+(15, 2, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc'),
+(16, 2, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc');
 
 --Yosemite
-
+INSERT INTO Site
+VALUES
+(17, 3, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
+(18, 3, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
+(19, 3, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc'),
+(20, 3, 'Site4 Name', 'Guided Tours', '#', 180, 0, 'insert desc'), 
+(21, 3, 'Site5 Name', 'Guided Tours', '#', 180, 0, 'insert desc'), 
+(22, 3, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc'),
+(23, 3, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc'),
+(24, 3, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc');
 
 --London
-
+INSERT INTO Site
+VALUES
+(25, 4, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
+(26, 4, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
+(27, 4, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc'),
+(28, 4, 'Site4 Name', 'Guided Tours', '#', 180, 0, 'insert desc'), 
+(29, 4, 'Site5 Name', 'Guided Tours', '#', 180, 0, 'insert desc'), 
+(30, 4, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc'),
+(31, 4, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc'),
+(32, 4, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc');
 
 --Berlin
-
+INSERT INTO Site
+VALUES
+(33, 5, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
+(34, 5, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
+(35, 5, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc'),
+(36, 5, 'Site4 Name', 'Guided Tours', '#', 180, 0, 'insert desc'), 
+(37, 5, 'Site5 Name', 'Guided Tours', '#', 180, 0, 'insert desc'), 
+(38, 5, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc'),
+(39, 5, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc'),
+(40, 5, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc');
 
 --Oslo
-
+INSERT INTO Site
+VALUES
+(41, 6, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
+(42, 6, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
+(43, 6, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc'),
+(44, 6, 'Site4 Name', 'Guided Tours', '#', 180, 0, 'insert desc'), 
+(45, 6, 'Site5 Name', 'Guided Tours', '#', 180, 0, 'insert desc'), 
+(46, 6, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc'),
+(47, 6, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc'),
+(48, 6, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc');
 
 --Paris
-
+INSERT INTO Site
+VALUES
+(49, 7, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
+(50, 7, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
+(51, 7, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc'),
+(52, 7, 'Site4 Name', 'Guided Tours', '#', 180, 0, 'insert desc'), 
+(53, 7, 'Site5 Name', 'Guided Tours', '#', 180, 0, 'insert desc'), 
+(54, 7, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc'),
+(55, 7, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc'),
+(56, 7, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc');
 
 --Rome
+INSERT INTO Site
+VALUES
+(57, 8, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
+(58, 8, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
+(59, 8, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc'),
+(60, 8, 'Site4 Name', 'Guided Tours', '#', 180, 0, 'insert desc'), 
+(61, 8, 'Site5 Name', 'Guided Tours', '#', 180, 0, 'insert desc'), 
+(62, 8, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc'),
+(63, 8, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc'),
+(64, 8, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc'),
 
 
+--Special
+(65, NULL, 'Breakfast', 'Special', '#', 60, 0, 'insert desc'),
+(66, NULL, 'Lunch', 'Special', '#', 60, 0, 'insert desc'),
+(67, NULL, 'Dinner', 'Special', '#', 60, 0, 'insert desc'),
+(68, NULL, 'Hotel Check in', 'Special', '#', 60, 0, 'insert desc'),
+(69, NULL, 'Hotel Check out', 'Special', '#', 60, 0, 'insert desc');
 -- END Site TEST DATA
