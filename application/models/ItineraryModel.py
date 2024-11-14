@@ -1,51 +1,46 @@
-
-
-
+from framework.Database import get_db
 
 def getItinerarys(userID):
-    pass
+    """
+    Gets a list of itinererys from a user id
+
+    :param userID: user id
+    :return: List of itineraries, or if a user has no itineraries then return None
+    """
+
+    db = get_db()
+    # Possible TODO make it check by username idk yet
+    Itinerarys = db.execute("SELECT * FROM Itinerary WHERE user_id=?;",(userID,)).fetchall()
+
+    #if nothing is returned by db
+    if len(Itinerarys) == 0:
+        return None
+
+    return Itinerarys
 
 def getItinerary(uuid):
     """
     Gets an itinerery from a uuid
 
-    :param code: hash of an itinerary
+    :param uuid: unique id of an itinerary
     :return: List of each day for a schedule, or if a code is not found then return None
     """
+    db = get_db()
+    Itinerary = db.execute("SELECT * FROM Itinerary WHERE uuid4=?;",(uuid,)).fetchone()
 
-    days = []
+    # If there is itinerary with a valid uuid
+    if Itinerary is not None:
+        days = []
 
-    if uuid is 123:
-        day1Schedule = [dict(time="9:00 AM - 10:00 AM", title="Registration and Coffee", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-                        dict(time="10:00 AM - 11:00 AM", title="Explore City", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-                        dict(time="11:00 AM - 12:30 PM", title="Get rental car", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-                        dict(time="12:30 PM - 1:30 PM", title="Lunch break", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-                        dict(time="6:00 PM - 7:00 PM", title="Dinner", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")]
+        for dayNum in range(1,8):
 
-        days.append(day1Schedule)
+            day = db.execute("SELECT * FROM ItineraryDetail Join ItineraryEvent ON (ItineraryDetail.event_id = ItineraryEvent.event_id) WHERE itinerary_id=? AND day=?;",(Itinerary['itinerary_id'], dayNum)).fetchall()
+            
+            # if nothing is returned
+            if len(day) == 0:
+                break
 
-        day2Schedule = [dict(time="9:00 AM - 10:00 AM", title="Eat breakfast", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-                        dict(time="10:00 AM - 11:00 AM", title="Go Hiking", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-                        dict(time="11:00 AM - 12:30 PM", title="Get rental car", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-                        dict(time="12:30 PM - 1:30 PM", title="Lunch break", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-                        dict(time="6:00 PM - 7:00 PM", title="Dinner", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")]
-
-        days.append(day2Schedule)
-
-        day3Schedule = [dict(time="9:00 AM - 10:00 AM", title="Something else", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-                        dict(time="10:00 AM - 11:00 AM", title="Explore City", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-                        dict(time="6:00 PM - 7:00 PM", title="Dinner", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")]
-
-        days.append(day3Schedule)
-
-        day4Schedule = [dict(time="9:00 AM - 10:00 AM", title="Something else", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-                        dict(time="10:00 AM - 11:00 AM", title="Explore City", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-                        dict(time="11:00 AM - 12:30 PM", title="Get rental car", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-                        dict(time="12:30 PM - 1:30 PM", title="Lunch break", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-                        dict(time="6:00 PM - 7:00 PM", title="Dinner", information="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")]
-
-        days.append(day4Schedule)
-    else:
-        return None
-
-    return days
+            days.append(day)
+        
+        return days
+    return None

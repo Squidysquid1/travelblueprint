@@ -1,7 +1,7 @@
 PRAGMA foreign_keys = 1;
 -- Drop existing tables
-DROP TABLE IF EXISTS `Site`;
 DROP TABLE IF EXISTS `ItineraryDetail`;
+DROP TABLE IF EXISTS `ItineraryEvent`;
 DROP TABLE IF EXISTS `Itinerary`;
 DROP TABLE IF EXISTS `Hotel`;
 DROP TABLE IF EXISTS `City`;
@@ -10,68 +10,68 @@ DROP TABLE IF EXISTS `FAQ`;
 -- Create new tables
 
 CREATE TABLE User (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  username TEXT UNIQUE NOT NULL,
-  password TEXT NOT NULL,
-  isAdmin TINYINT -- Boolean
+  `user_id` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `username` TEXT UNIQUE NOT NULL,
+  `password` TEXT NOT NULL,
+  `is_admin` TINYINT -- Boolean
 );
 
 CREATE TABLE `City` (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name VARCHAR(255),
-  country VARCHAR(255), -- Could make country a separate table but meh
-  img VARCHAR(255),
-  desc TEXT
+  `city_id` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `name` VARCHAR(255),
+  `country` VARCHAR(255), -- Could make country a separate table but meh
+  `img` VARCHAR(255),
+  `desc` TEXT
 );
 
 CREATE TABLE `Itinerary`(
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  userID INTEGER,
-  cityID INTEGER,
-  hotelID INTEGER,
-  uuid4 VARCHAR(255) NOT NULL,
-  FOREIGN KEY (userID) REFERENCES User(id),
-  FOREIGN KEY (cityID) REFERENCES City(id),
-  FOREIGN KEY (hotelID) REFERENCES Hotel(id)
+  `itinerary_id` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `user_id` INTEGER,
+  `city_id` INTEGER,
+  `hotel_id` INTEGER,
+  `uuid4` VARCHAR(255) NOT NULL,
+  FOREIGN KEY (`user_id`) REFERENCES User(`user_id`),
+  FOREIGN KEY (`city_id`) REFERENCES City(`city_id`),
+  FOREIGN KEY (`hotel_id`) REFERENCES Hotel(`hotel_id`)
 );
 
 CREATE TABLE `ItineraryDetail` (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  itineraryID INTEGER,
-  siteID INTEGER,
-  day INTEGER,
-  time VARCHAR(255),
-  FOREIGN KEY (itineraryID) REFERENCES Itinerary(id),
-  FOREIGN KEY (siteID) REFERENCES Hotel(id)
+  `itinerary_detail_id` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `itinerary_id` INTEGER,
+  `event_id` INTEGER,
+  `day` INTEGER,
+  `time` VARCHAR(255),
+  FOREIGN KEY (`itinerary_id`) REFERENCES Itinerary(`itinerary_id`),
+  FOREIGN KEY (`event_id`) REFERENCES ItineraryEvent(`event_id`)
 );
 
-CREATE TABLE `Site` (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  cityID INTEGER,
-  name VARCHAR(255) NOT NULL,
-  category VARCHAR(255) NOT NULL,
-  url VARCHAR(255) NOT NULL,
-  averageDuration int, -- in min
-  isPreffered TINYINT, -- Boolean
-  description TEXT NOT NULL,
-  FOREIGN KEY (cityID) REFERENCES City(id)
+CREATE TABLE `ItineraryEvent` ( -- change to event
+  `event_id` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `city_id` INTEGER,
+  `title` VARCHAR(255) NOT NULL,
+  `category` VARCHAR(255) NOT NULL,
+  `url` VARCHAR(255) NOT NULL,
+  `average_duration` int, -- in min
+  `is_preffered` TINYINT, -- Boolean
+  `information` TEXT NOT NULL,
+  FOREIGN KEY (`city_id`) REFERENCES City(`city_id`)
 );
 
 CREATE TABLE `Hotel` (
-  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
-  `cityID` INTEGER,
+  `hotel_id` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `city_id` INTEGER,
   `name` VARCHAR(255) NOT NULL,
-  `locationPref` VARCHAR(255) NOT NULL,
+  `location_pref` VARCHAR(255) NOT NULL,
   `url` VARCHAR(255) NOT NULL,
-  `isPreffered` TINYINT, -- Boolean
+  `is_preffered` TINYINT, -- Boolean
   `description` TEXT NOT NULL,
-  FOREIGN KEY (`cityID`) REFERENCES City(`id`)
+  FOREIGN KEY (`city_id`) REFERENCES City(`city_id`)
 );
 
 CREATE TABLE FAQ (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  question TEXT UNIQUE NOT NULL,
-  answer TEXT NOT NULL
+  `faq_id` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `question` TEXT NOT NULL,
+  `answer` TEXT NOT NULL
 );
 
 ---------------------- TEST DATA BELOW ----------------------
@@ -174,10 +174,10 @@ VALUES (16, 8, 'Hotel 2', "country", '#', 0, 'insert desc');
 
 -- END Hotel TEST DATA
 
--- BEGIN Site TEST DATA
+-- BEGIN ItineraryEvent TEST DATA
 
 -- Krakow
-INSERT INTO Site
+INSERT INTO ItineraryEvent
 VALUES
 (1, 1, 'Market Square', "Exploring", 'https://visitkrakow.com/krakows-market-square/', 120, 0, 'insert desc'),
 (2, 1, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
@@ -188,7 +188,7 @@ VALUES
 (7, 1, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc'),
 (8, 1, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc');
 --Warsaw
-INSERT INTO Site
+INSERT INTO ItineraryEvent
 VALUES
 (9, 2, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
 (10, 2, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
@@ -200,7 +200,7 @@ VALUES
 (16, 2, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc');
 
 --Yosemite
-INSERT INTO Site
+INSERT INTO ItineraryEvent
 VALUES
 (17, 3, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
 (18, 3, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
@@ -212,7 +212,7 @@ VALUES
 (24, 3, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc');
 
 --London
-INSERT INTO Site
+INSERT INTO ItineraryEvent
 VALUES
 (25, 4, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
 (26, 4, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
@@ -224,7 +224,7 @@ VALUES
 (32, 4, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc');
 
 --Berlin
-INSERT INTO Site
+INSERT INTO ItineraryEvent
 VALUES
 (33, 5, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
 (34, 5, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
@@ -236,7 +236,7 @@ VALUES
 (40, 5, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc');
 
 --Oslo
-INSERT INTO Site
+INSERT INTO ItineraryEvent
 VALUES
 (41, 6, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
 (42, 6, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
@@ -248,7 +248,7 @@ VALUES
 (48, 6, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc');
 
 --Paris
-INSERT INTO Site
+INSERT INTO ItineraryEvent
 VALUES
 (49, 7, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
 (50, 7, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
@@ -260,7 +260,7 @@ VALUES
 (56, 7, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc');
 
 --Rome
-INSERT INTO Site
+INSERT INTO ItineraryEvent
 VALUES
 (57, 8, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
 (58, 8, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc'), 
@@ -272,10 +272,41 @@ VALUES
 (64, 8, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc'),
 
 
---Special
+--Special/General
 (65, NULL, 'Breakfast', 'Special', '#', 60, 0, 'insert desc'),
 (66, NULL, 'Lunch', 'Special', '#', 60, 0, 'insert desc'),
 (67, NULL, 'Dinner', 'Special', '#', 60, 0, 'insert desc'),
 (68, NULL, 'Hotel Check in', 'Special', '#', 60, 0, 'insert desc'),
-(69, NULL, 'Hotel Check out', 'Special', '#', 60, 0, 'insert desc');
--- END Site TEST DATA
+(69, NULL, 'Hotel Check out', 'Special', '#', 60, 0, 'insert desc'),
+(70, NULL, 'Explore City', 'Special', '#', 60, 0, 'insert desc'),
+(71, NULL, 'Get Rental Car', 'Special', '#', 60, 0, 'insert desc');
+-- END ItineraryEvent TEST DATA
+
+
+
+
+-- BEGIN Itinerary TEST DATA
+
+
+INSERT INTO Itinerary
+VALUES
+(1,1,1,1,'b75171b8-1023-4ff3-acfc-0047f6e37079');
+
+INSERT INTO ItineraryDetail
+VALUES
+(1,1, 65, 1, "9am-10am"), --breakfast
+(2,1, 1, 1, "11am-12pm"), --
+(3,1, 2, 1, "1pm-3pm"), --
+(4,1, 3, 1, "4pm-5pm"), --
+
+(5,1, 65, 2, "9am-10am"), --breakfast
+(6,1, 4, 2, "11am-12pm"), --
+(7,1, 5, 2, "1pm-3pm"), --
+(8,1, 6, 2, "4pm-6pm"), --
+
+(9,1, 65, 3, "9am-10am"),  --breakfast
+(10,1, 69, 3, "11:00am-11:30am"), --checkout
+(11,1, 7, 3, "12pm-1pm"), --
+(12,1, 8, 3, "1pm-3pm"), --
+(13,1, 66, 3, "4pm-6pm"); --
+-- END Itinerary TEST DATA

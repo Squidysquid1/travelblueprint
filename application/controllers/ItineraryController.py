@@ -16,7 +16,7 @@ class ItineraryController:
             flash("Please generate an itinerary as one has not been generated for you yet")
             return redirect(url_for('cityplan_controller.index'))
 
-        code  = int(request.args.get('code'))
+        code  = request.args.get('code') # TODO: Validate this
         data["days"] = getItinerary(code)
 
         # Error if days is was not found

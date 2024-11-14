@@ -14,7 +14,7 @@ def getCity(id):
 
 def getHotels(cityName):
     db = get_db()
-    execute = db.execute("SELECT * FROM Hotel JOIN City ON (Hotel.cityID = City.id) WHERE City.name = ? ;", (cityName,))
+    execute = db.execute("SELECT * FROM Hotel JOIN City ON (Hotel.city_id = City.city_id) WHERE City.name = ? ;", (cityName,))
 
     hotels = []
     hotels = execute.fetchall()
@@ -29,7 +29,7 @@ def getSites(cityName):
 
     # category type: Exploring, Relaxing, Guided Tours 
     db = get_db()
-    execute = db.execute("SELECT * FROM Site JOIN City ON (Site.cityID = City.id) WHERE City.name = ? ;", (cityName,))
+    execute = db.execute("SELECT * FROM Site JOIN City ON (Site.city_id = City.city_id) WHERE City.name = ? ;", (cityName,))
 
     sites = []
     sites = execute.fetchall()
