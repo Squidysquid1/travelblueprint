@@ -6,6 +6,7 @@
 <main>
     <h1> Welcome {{ g.user['username'] }}</h1>
 
+    {% if data.itineraries %}
     <div class="row row-cols-1 row-cols-md-4 g-4">
         {% for itinerary in data.itineraries %}
         <div class="col">
@@ -20,5 +21,8 @@
         </div>
         {% endfor %}
     </div>
+    {%else%}
+    <h2>No Itineraries found</h2>
+    {%endif%}
 </main>
 {% endblock %}
