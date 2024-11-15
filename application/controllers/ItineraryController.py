@@ -49,10 +49,11 @@ class ItineraryController:
         hotel = random.choice(hotels)
         itinerary_id = addItinerary(g.user['user_id'], city['city_id'], hotel['hotel_id'], uniqueCode)
 
-        sites = getEvents(city['name'])
+        
         relaxedSites = getEvents(city['name'], "Relaxing")
+        sites = [event for event in getEvents(city['name']) if event not in relaxedSites]
 
-
+        #TODO: ADD TIME CALCULATION
         #####################First Day#####################
         addItineraryDetail(itinerary_id, 7, 1, "8:00AM - 10:30AM") # fly in 
         addItineraryDetail(itinerary_id, 6, 1, "10:30AM - 12:00PM") # Explore
@@ -62,10 +63,11 @@ class ItineraryController:
         addItineraryDetail(itinerary_id, 3, 1, "6:30PM - 8:00PM") # Dinner
         
         #####################Middle Days#####################
-        # 2 - 4 sites
         for dayNum in range(2,days):
             addItineraryDetail(itinerary_id, 1, dayNum,"8:30AM - 9:30AM") # Breakfast
+            addItineraryDetail(itinerary_id, sites.pop()['event_id'], dayNum,"idk time") # site 1
             addItineraryDetail(itinerary_id, 2, dayNum,"12:00PM - 1:00PM") # Lunch
+            addItineraryDetail(itinerary_id, sites.pop()['event_id'], dayNum,"idk time") # site 2
             addItineraryDetail(itinerary_id, 3, dayNum,"6:00PM - 7:00PM") # Dinner
         #####################Last Day#####################
         addItineraryDetail(itinerary_id,1, days, "8:30AM - 9:30AM") # Breakfast
