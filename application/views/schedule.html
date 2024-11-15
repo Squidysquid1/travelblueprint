@@ -34,7 +34,7 @@
                                         {{event.information}}
                                     </p>
                                 </div>
-                                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#MapModal" data-bs-map-query="food near me">Map</button>
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#MapModal" data-bs-map-iframe="{{event.map_url}}">Map</button>
                             </li>
                             {% endfor %}
                         </ul>
@@ -57,7 +57,7 @@
             </div>
   
             <div class="modal-body">
-              <h1>MAP GOES HERE EVENTUALLY</h1>
+              <iframe id="gMapIframe" src="" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
   
             <div class="modal-footer">
@@ -76,15 +76,9 @@
     // Button that triggered the modal
     var button = event.relatedTarget
     // Extract info from data-bs-* attributes
-    //var city = button.getAttribute('data-bs-city')
-    // If necessary, you could initiate an AJAX request here
-    // and then do the updating in a callback.
-    //
-    // Update the modal's content.
-    //var modalCity = surveyModal.querySelector('#survey-city')
-
-    //modalTitle.textContent = 'New message to ' + recipient
-    //modalCity.value = city
+    var mapSrc = button.getAttribute('data-bs-map-iframe')
+    iframe = document.getElementById("gMapIframe")
+    iframe.src = mapSrc
 });
 
 </script>
