@@ -48,36 +48,24 @@ Password: test
 ## Flask Application Structure 
 ```
 .
-├── application
-│   ├── controllers
+├── application/
+│   ├── ApplicationRouter.py
+│   ├── controllers/
 │   │   ├── AccountController.py
 │   │   ├── CityPlanController.py
 │   │   ├── FaqController.py
 │   │   ├── HomeController.py
 │   │   └── ItineraryController.py
-│   ├── models
+│   ├── models/
+│   │   ├── FaqModel.py
 │   │   ├── ItineraryModel.py
-│   │   ├── LocationModel.py
-│   │   └── UserModel.py
-│   ├── routes
-│   │   └── ApplicationRouter.py
-│   ├── static
-│   └── views
-│       ├── auth
-│       │   ├── login.html
-│       │   └── register.html
-│       ├── city_plan.html
-│       ├── common
-│       │   ├── base.html
-│       │   ├── footer.html
-│       │   └── header.html
-│       ├── construction.html
-│       ├── faq.html
-│       ├── home.html
-│       └── schedule.html
+│   │   └── LocationModel.py
+│   ├── static/
+│   └── views/
 ├── app.py
 ├── config.py
-├── framework
+├── data.db
+├── framework/
 │   ├── Auth.py
 │   ├── Database.py
 │   ├── Router.py
