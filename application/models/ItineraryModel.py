@@ -44,3 +44,15 @@ def getItinerary(uuid):
         
         return days
     return None
+
+def addItinerary(user_id, city_id, hotel_id, uuid4):
+    db = get_db()
+    lastrowid = db.execute("INSERT INTO Itinerary (user_id, city_id, hotel_id, uuid4) VALUES (?, ?, ?, ?);",(user_id, city_id, hotel_id, str(uuid4))).lastrowid
+    db.commit()
+    return lastrowid
+
+def addItineraryDetail(itinerary_id, event_id, day, time):
+    db = get_db()
+    lastrowid = db.execute("INSERT INTO ItineraryDetail (itinerary_id, event_id, day, time) VALUES (?, ?, ?, ?);",(itinerary_id, event_id, day, time)).lastrowid
+    db.commit()
+    return lastrowid

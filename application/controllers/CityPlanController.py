@@ -1,5 +1,5 @@
 from flask import render_template
-from application.models.LocationModel import getCitys
+from application.models.LocationModel import getCities
 
 
 class CityPlanController:
@@ -8,6 +8,6 @@ class CityPlanController:
         data = {}
         # put cities into the template  
 
-        data['cities'] = getCitys()
+        data['cities'] = getCities()
 
         return render_template('city_plan.html', data=data)
