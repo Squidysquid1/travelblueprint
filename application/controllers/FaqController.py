@@ -1,4 +1,5 @@
 from flask import render_template
+
 from application.models.FaqModel import getFaqs
 
 class FaqController:

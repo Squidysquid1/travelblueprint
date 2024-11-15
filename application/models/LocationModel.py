@@ -2,6 +2,13 @@ from framework.Database import get_db
 import random
 
 def getCities():
+    """
+    Gets a list of cities.
+    Args:
+        None
+    Returns:
+        List of cities, OR None if no cities found.
+    """
     db = get_db()
     execute = db.execute("SELECT * FROM City;")
 
@@ -13,6 +20,13 @@ def getCities():
     return cities
 
 def getCity(cityName):
+    """
+    Gets a city given a city name.
+    Args:
+        cityName (str): the name of the city
+    Returns:
+        city, OR None if no city found.
+    """
     db = get_db()
     execute = db.execute("SELECT * FROM City WHERE name=?;", (cityName,))
 
@@ -21,6 +35,13 @@ def getCity(cityName):
     return city
 
 def getHotels(cityName):
+    """
+    Gets a Hotels for a given city.
+    Args:
+        cityName (str): the name of the city
+    Returns:
+        List of hotels, OR None if no hotels found.
+    """
     db = get_db()
     execute = db.execute("SELECT * FROM Hotel JOIN City ON (Hotel.city_id = City.city_id) WHERE City.name = ? ;", (cityName,))
 
@@ -36,7 +57,14 @@ def getHotel(id):
 
 
 def getEvents(cityName, category=None):
-    # category type: Exploring, Relaxing, Guided Tours 
+    """
+    Gets a events for a given city and optionally the category of event
+    Args:
+        cityName (str): the name of the city
+        category (opt str): Exploring, Relaxing, Guided Tours
+    Returns:
+        List of events, OR None if no events found.
+    """ 
     db = get_db()
 
     sql = "SELECT * FROM ItineraryEvent JOIN City ON (ItineraryEvent.city_id = City.city_id) WHERE City.name = ? "
@@ -56,6 +84,13 @@ def getEvents(cityName, category=None):
     return events
 
 def getSpecialEvents():
+    """
+    Gets all special events.
+    Args:
+        None
+    Returns:
+        List of Special events, OR None if no events found.
+    """ 
     db = get_db()
     execute = db.execute("SELECT * FROM ItineraryEvent WHERE category = 'Special';")
 

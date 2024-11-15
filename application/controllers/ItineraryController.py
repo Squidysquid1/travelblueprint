@@ -1,15 +1,12 @@
-from flask import render_template
-from flask import request
-from flask import redirect
-from flask import g
-from flask import url_for
-from flask import flash
+from flask import render_template, request, redirect, g, url_for, flash
+
+from framework.Auth import login_required
+from application.models.ItineraryModel import getItinerary, getItinerarys, addItinerary, addItineraryDetail
+from application.models.LocationModel import getCity, getHotels, getEvents, getSpecialEvents
+
 from datetime import datetime, timedelta
 import uuid
 import random
-
-from application.models.ItineraryModel import getItinerary, getItinerarys, addItinerary, addItineraryDetail
-from application.models.LocationModel import getCity, getHotels, getEvents, getSpecialEvents
 
 class ItineraryController:
 
@@ -28,14 +25,11 @@ class ItineraryController:
         if data["days"] is None:
             flash("Itinerary code is not valid")
             return redirect(url_for('cityplan_controller.index'))
-        
-
 
         return render_template('schedule.html', data=data)
 
-        
 
-
+    @login_required
     def createItinerary():
         #Flash error if form not valid and redirect
         form = request.form.to_dict()
@@ -98,8 +92,6 @@ class ItineraryController:
             addItineraryDetail(itinerary_id, event['event_id'], days, createRange(curTime, event['average_duration'])) 
             curTime = addMinutes(curTime, event['average_duration'])
 
-
-
         return redirect(url_for('itinerary_controller.index', code=uniqueCode))
 
 
@@ -113,6 +105,7 @@ def validForm(formDict):
         return False
 
     return True
+
 
 def addMinutes(start_time, minutes_to_add):
   """Adds minutes to a given start time."""
@@ -137,6 +130,7 @@ def createRange(start_time, minutes_to_add):
     new_time = start_time + timedelta(minutes=minutes_to_add)
 
     return start_time.strftime("%-I:%M%p") + " - " + new_time.strftime("%-I:%M%p")
+
 
 def findSpecialEvent(events, id):
     for event in events:

@@ -1,12 +1,10 @@
 from flask import render_template
+
 from application.models.LocationModel import getCities
 
-
-class CityPlanController:
-
+class CityPlanController:    
     def index():
         data = {}
-        # put cities into the template  
 
         data['cities'] = getCities()
 

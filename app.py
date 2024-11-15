@@ -1,4 +1,5 @@
 from flask import Flask
+
 from framework.Router import Router
 
 import config
