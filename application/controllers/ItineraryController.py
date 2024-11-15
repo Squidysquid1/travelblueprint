@@ -4,10 +4,12 @@ from flask import redirect
 from flask import g
 from flask import url_for
 from flask import flash
+from datetime import datetime, timedelta
 import uuid
 import random
+
 from application.models.ItineraryModel import getItinerary, getItinerarys, addItinerary, addItineraryDetail
-from application.models.LocationModel import getCity, getHotels, getEvents
+from application.models.LocationModel import getCity, getHotels, getEvents, getSpecialEvents
 
 class ItineraryController:
 
@@ -52,31 +54,51 @@ class ItineraryController:
         
         relaxedSites = getEvents(city['name'], "Relaxing")
         sites = [event for event in getEvents(city['name']) if event not in relaxedSites]
+        specialEvents = getSpecialEvents()
 
-        #TODO: ADD TIME CALCULATION
+        #could clean up with one MEGA loop but meh
         #####################First Day#####################
-        addItineraryDetail(itinerary_id, 7, 1, "8:00AM - 10:30AM") # fly in 
-        addItineraryDetail(itinerary_id, 6, 1, "10:30AM - 12:00PM") # Explore
-        addItineraryDetail(itinerary_id, 2, 1, "12:00PM - 1:30PM") # Lunch
-        addItineraryDetail(itinerary_id, 4, 1, "2:00PM - 4:00PM") # Checkin
-        addItineraryDetail(itinerary_id, relaxedSites[0]['event_id'], 1, "4:30PM - 6:30PM") # relaxing site 1
-        addItineraryDetail(itinerary_id, 3, 1, "6:30PM - 8:00PM") # Dinner
-        
-        #####################Middle Days#####################
-        for dayNum in range(2,days):
-            addItineraryDetail(itinerary_id, 1, dayNum,"8:30AM - 9:30AM") # Breakfast
-            addItineraryDetail(itinerary_id, sites.pop()['event_id'], dayNum,"idk time") # site 1
-            addItineraryDetail(itinerary_id, 2, dayNum,"12:00PM - 1:00PM") # Lunch
-            addItineraryDetail(itinerary_id, sites.pop()['event_id'], dayNum,"idk time") # site 2
-            addItineraryDetail(itinerary_id, 3, dayNum,"6:00PM - 7:00PM") # Dinner
-        #####################Last Day#####################
-        addItineraryDetail(itinerary_id,1, days, "8:30AM - 9:30AM") # Breakfast
-        addItineraryDetail(itinerary_id,5, days, "9:30AM - 10:30AM") # Checkout
-        addItineraryDetail(itinerary_id,relaxedSites[1]['event_id'], days, "10:30AM - 12:30PM")
-        addItineraryDetail(itinerary_id,2, days, "1:00PM - 2:00PM") # Lunch
-        addItineraryDetail(itinerary_id,8, days, "2:00PM - 4:00PM") # fly out
+        curTime = "8:00AM"
+        events = []
+        events.append(findSpecialEvent(specialEvents, 7)) # fly in
+        events.append(findSpecialEvent(specialEvents, 6)) # Explore
+        events.append(findSpecialEvent(specialEvents, 2)) # Lunch
+        events.append(findSpecialEvent(specialEvents, 4)) # Checkin
+        events.append(relaxedSites[0]) # relaxing site 1
+        events.append(findSpecialEvent(specialEvents, 3)) # Dinner
+
+        for event in events:
+            addItineraryDetail(itinerary_id, event['event_id'], 1, createRange(curTime, event['average_duration'])) 
+            curTime = addMinutes(curTime, event['average_duration'])
 
         
+        #####################Middle Days#####################        
+        for dayNum in range(2,days):
+            curTime = "8:00AM"
+            events = []
+            events.append(findSpecialEvent(specialEvents, 1)) # Breakfast
+            events.append(sites.pop()) # site 1
+            events.append(findSpecialEvent(specialEvents, 2)) # Lunch
+            events.append(sites.pop()) # site 2
+            events.append(findSpecialEvent(specialEvents, 3)) # Dinner
+
+            for event in events:
+                addItineraryDetail(itinerary_id, event['event_id'], dayNum, createRange(curTime, event['average_duration'])) 
+                curTime = addMinutes(curTime, event['average_duration'])
+        #####################Last Day#####################
+        curTime = "8:00AM"
+        events = []
+        events.append(findSpecialEvent(specialEvents, 1)) # Breakfast
+        events.append(findSpecialEvent(specialEvents, 5)) # Checkout
+        events.append(relaxedSites[1]) # relaxing site 2
+        events.append(findSpecialEvent(specialEvents, 2)) # Lunch
+        events.append(findSpecialEvent(specialEvents, 8)) # fly out
+
+        for event in events:
+            addItineraryDetail(itinerary_id, event['event_id'], days, createRange(curTime, event['average_duration'])) 
+            curTime = addMinutes(curTime, event['average_duration'])
+
+
 
         return redirect(url_for('itinerary_controller.index', code=uniqueCode))
 
@@ -91,3 +113,34 @@ def validForm(formDict):
         return False
 
     return True
+
+def addMinutes(start_time, minutes_to_add):
+  """Adds minutes to a given start time."""
+
+  # Convert start_time to datetime object if it's a string
+  if isinstance(start_time, str):
+    start_time = datetime.strptime(start_time, "%I:%M%p")
+
+  # Calculate new time
+  new_time = start_time + timedelta(minutes=minutes_to_add)
+
+  return new_time.strftime("%-I:%M%p")
+
+
+def createRange(start_time, minutes_to_add):
+    """Creates range of minutes"""
+
+    if isinstance(start_time, str):
+        start_time = datetime.strptime(start_time, "%I:%M%p")
+
+    # Calculate new time
+    new_time = start_time + timedelta(minutes=minutes_to_add)
+
+    return start_time.strftime("%-I:%M%p") + " - " + new_time.strftime("%-I:%M%p")
+
+def findSpecialEvent(events, id):
+    for event in events:
+        if event['event_id'] == id:
+            return event
+
+    return None

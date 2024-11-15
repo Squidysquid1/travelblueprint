@@ -5,8 +5,10 @@ def getCities():
     db = get_db()
     execute = db.execute("SELECT * FROM City;")
 
-    cities = []
     cities = execute.fetchall()
+
+    if len(cities) == 0:
+        return None
 
     return cities
 
@@ -22,9 +24,11 @@ def getHotels(cityName):
     db = get_db()
     execute = db.execute("SELECT * FROM Hotel JOIN City ON (Hotel.city_id = City.city_id) WHERE City.name = ? ;", (cityName,))
 
-    hotels = []
     hotels = execute.fetchall()
-    
+
+    if len(hotels) == 0:
+        return None
+
     return hotels
 
 def getHotel(id):
@@ -34,6 +38,7 @@ def getHotel(id):
 def getEvents(cityName, category=None):
     # category type: Exploring, Relaxing, Guided Tours 
     db = get_db()
+
     sql = "SELECT * FROM ItineraryEvent JOIN City ON (ItineraryEvent.city_id = City.city_id) WHERE City.name = ? "
     param = [cityName]
     if category:
@@ -43,5 +48,20 @@ def getEvents(cityName, category=None):
     
     execute = db.execute(sql, param)
     events = execute.fetchall()
+
+    if len(events) == 0:
+        return None
+
     random.shuffle(events)
+    return events
+
+def getSpecialEvents():
+    db = get_db()
+    execute = db.execute("SELECT * FROM ItineraryEvent WHERE category = 'Special';")
+
+    events = execute.fetchall()
+
+    if len(events) == 0:
+        return None
+
     return events
