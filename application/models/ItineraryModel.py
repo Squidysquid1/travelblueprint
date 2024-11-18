@@ -20,8 +20,18 @@ def getItinerarys(userID):
     return Itinerarys
 
 
-# TODO: Maybe rename this function to be clearer
-def getItinerary(uuid4):
+def getItineraryHotel(uuid4):
+    """
+    Gets an itinerery hotel from a uuid.
+    Args:
+        uuid4 (str): unique id of an itinerary 
+    Returns:
+        An itinerary listing, or if a code is not found then return None.
+    """
+    db = get_db()
+    return  db.execute("SELECT * FROM Itinerary JOIN Hotel ON (Itinerary.hotel_id = Hotel.hotel_id) WHERE uuid4=?;",(uuid4,)).fetchone()
+
+def getItineraryDays(uuid4):
     """
     Gets an itinerery from a uuid.
     Args:

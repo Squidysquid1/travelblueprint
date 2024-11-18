@@ -9,8 +9,11 @@
             <div class="col-lg-5 mb-5 mb-lg-0">
                 <h5 class="mb-4 text-info aos-init aos-animate" data-aos="fade-up">Schedule and Agenda</h5>
                 <div class="nav nav-pills flex-column aos-init aos-animate" id="myTab" role="tablist" data-aos="fade-up">
+                    <button class="nav-link px-4 text-start active" id="hotel-tab" data-bs-toggle="tab" data-bs-target="#hotel" type="button" role="tab" aria-controls="hotel" aria-selected="true">
+                        <span class="d-block fs-5 fw-bold">Hotel</span>
+                    </button>
                     {% for day in data.days %}
-                    <button class="nav-link px-4 text-start {% if loop.index==1 %}active{% endif %}" id="d{{loop.index}}-tab" data-bs-toggle="tab" data-bs-target="#day{{loop.index}}" type="button" role="tab" aria-controls="day{{loop.index}}" aria-selected={% if loop.index==1 %}"true"{% else %}"false" tabindex="-1"{% endif %}>
+                    <button class="nav-link px-4 text-start" id="d{{loop.index}}-tab" data-bs-toggle="tab" data-bs-target="#day{{loop.index}}" type="button" role="tab" aria-controls="day{{loop.index}}" aria-selected="false" tabindex="-1">
                         <span class="d-block fs-5 fw-bold">Day {{loop.index}}</span>
                     </button>
                     {% endfor %}
@@ -19,8 +22,19 @@
             
             <div class="col-lg-7 col-xl-6">
                 <div data-aos="fade-up" class="tab-content aos-init aos-animate" id="myTabContent">
+                    <div class="tab-pane fade active show" id="hotel" role="tabpanel" aria-labelledby="hotel-tab">
+                        <div class="card">
+                            <h5 class="card-header">{{data.hotel.name}}</h5>
+                            <div class="card-body">
+                                <p class="card-text">{{data.hotel.description}}</p>
+                                <a href="{{data.hotel.url}}" target="_blank" class="btn btn-primary">Book hotel!</a>
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#MapModal" data-bs-map-iframe="{{data.hotel.map_url}}">Map</button>
+                            </div>
+                        </div>
+                    </div>
+
                     {% for day in data.days %}
-                    <div class="tab-pane fade {% if loop.index==1 %}active show{% endif %}" id="day{{loop.index}}" role="tabpanel" aria-labelledby="d{{loop.index}}-tab">
+                    <div class="tab-pane fade" id="day{{loop.index}}" role="tabpanel" aria-labelledby="d{{loop.index}}-tab">
                         <ul class="pt-4 list-unstyled mb-0">
                             {% for event in day %}
                             <li class="d-flex flex-column flex-md-row py-4">

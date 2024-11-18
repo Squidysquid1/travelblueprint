@@ -1,12 +1,13 @@
 from flask import render_template, request, redirect, g, url_for, flash
 
 from framework.Auth import login_required
-from application.models.ItineraryModel import getItinerary, getItinerarys, addItinerary, addItineraryDetail
+from application.models.ItineraryModel import getItineraryHotel, getItineraryDays, addItinerary, addItineraryDetail
 from application.models.LocationModel import getCity, getHotels, getEvents, getSpecialEvents
 
 from datetime import datetime, timedelta
 import uuid
 import random
+import re
 
 class ItineraryController:
 
@@ -14,12 +15,13 @@ class ItineraryController:
         data = {}
         
         # Error if no code is in param
-        if request.args.get('code') is None:
+        if request.args.get('code') is None or not validUuid4(request.args.get('code')) :
             flash("Please generate an itinerary as one has not been generated for you yet")
             return redirect(url_for('cityplan_controller.index'))
 
-        code  = request.args.get('code') # TODO: Validate this
-        data["days"] = getItinerary(code)
+        code  = request.args.get('code')
+        data["days"] = getItineraryDays(code)
+        data["hotel"] = getItineraryHotel(code)
 
         # Error if days is was not found
         if data["days"] is None:
@@ -106,6 +108,11 @@ def validForm(formDict):
 
     return True
 
+def validUuid4(uuid4):
+    UUID_PATTERN = re.compile(r'^[\da-f]{8}-([\da-f]{4}-){3}[\da-f]{12}$', re.IGNORECASE)
+
+    return bool(UUID_PATTERN.match(uuid4))
+
 
 def addMinutes(start_time, minutes_to_add):
   """Adds minutes to a given start time."""
@@ -117,7 +124,7 @@ def addMinutes(start_time, minutes_to_add):
   # Calculate new time
   new_time = start_time + timedelta(minutes=minutes_to_add)
 
-  return new_time.strftime("%-I:%M%p")
+  return new_time.strftime("%I:%M%p")
 
 
 def createRange(start_time, minutes_to_add):
@@ -129,7 +136,7 @@ def createRange(start_time, minutes_to_add):
     # Calculate new time
     new_time = start_time + timedelta(minutes=minutes_to_add)
 
-    return start_time.strftime("%-I:%M%p") + " - " + new_time.strftime("%-I:%M%p")
+    return start_time.strftime("%I:%M%p") + " - " + new_time.strftime("%I:%M%p")
 
 
 def findSpecialEvent(events, id):
