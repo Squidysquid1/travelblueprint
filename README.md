@@ -74,6 +74,10 @@ Password: test
 └── requirements.txt
 ```
 
+## Debugging
+
+In my development debugging was ran by running relevant pieces of code and testing out what ive been developing. If any bugs came about then I tracked my major bugs through an excel spreadsheet with expected resolution date.
+
 ## Reference
 
 Offical Website
