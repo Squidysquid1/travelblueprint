@@ -101,7 +101,7 @@ class ItineraryController:
 def validForm(formDict):
     if "city" not in formDict:
         return False
-    if "days" not in formDict and formDict['days'] not in range(3,8):
+    if "days" not in formDict and formDict['days'] not in range(3,6):
         return False
     if "living_preference" not in formDict:
         return False
