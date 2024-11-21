@@ -5,13 +5,17 @@
 An easy to use travel itinerary generator
 
 ## Installation
-Install latest version with python3 and ensure pip is installed at download
+Install latest version of python3 and ensure pip is installed at download and you add python to path.
+
+Install python3:
+https://www.python.org/downloads/
 
 Install with pip:
+(Please make sure you are in the directory of the repository when running)
 ```
 $ pip install -r requirements.txt
 ```
-
+Restart your terminal to make the flask command accessible.
 ## Run Flask
 ### Run flask for develop
 ```
