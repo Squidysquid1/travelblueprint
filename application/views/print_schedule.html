@@ -1,0 +1,53 @@
+{% extends 'common/base.html' %}
+
+{% block title %}Schedule{% endblock %}
+
+{% block content %}
+<main>
+    <div class="container py-9 py-lg-11 position-relative z-index-1">
+        <div class="row">
+
+            <div class="col-lg-10 col-xl-9">
+                <h2>Hotel</h2>
+                <hr>
+                <div data-aos="fade-up" class="tab-content aos-init aos-animate" id="myTabContent">
+                    <div class="tab-pane fade active show" id="hotel" role="tabpanel" aria-labelledby="hotel-tab">
+                        <div class="card">
+                            <h5 class="card-header">{{data.hotel.name}}</h5>
+                            <div class="card-body">
+                                <p class="card-text">{{data.hotel.description}}</p>
+                                <a href="{{data.hotel.url}}" target="_blank">{{data.hotel.url}}</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% for day in data.days %}
+                    <h2>Day {{loop.index}}</h2>
+                    <hr>
+                        <ul class="pt-4 list-unstyled mb-0">
+                            {% for event in day %}
+                            <li class="d-flex flex-column flex-md-row py-4">
+                                <span class="flex-shrink-0 width-13x me-md-4 d-block mb-3 mb-md-0 small text-muted">
+                                    {{event.time}}
+                                </span>
+                                
+                                <div class="flex-grow-1 ps-4 border-start border-3">
+                                    <h4>{{event.title}}</h4>
+                                    <p class="mb-0">
+                                        {{event.information}}
+                                    </p>
+                                    {% if event.url %}
+                                    <br>
+                                    <a href="{{event.url}}" target="_blank">{{event.url}}</a>
+                                    {% endif %}
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

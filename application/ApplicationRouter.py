@@ -21,6 +21,7 @@ routes.append(CityPlanRouter)
 
 ItineraryRouter = Blueprint('itinerary_controller', __name__)
 ItineraryRouter.route('/schedule', methods=['GET'])(ItineraryController.index)
+ItineraryRouter.route('/print-schedule', methods=['GET'])(ItineraryController.printItinerary)
 ItineraryRouter.route('/create-itinerary', methods=['POST'])(ItineraryController.createItinerary)
 routes.append(ItineraryRouter)
 

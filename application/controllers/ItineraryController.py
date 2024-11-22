@@ -20,6 +20,7 @@ class ItineraryController:
             return redirect(url_for('cityplan_controller.index'))
 
         code  = request.args.get('code')
+        data["code"] = code
         data["days"] = getItineraryDays(code)
         data["hotel"] = getItineraryHotel(code)
 
@@ -29,6 +30,25 @@ class ItineraryController:
             return redirect(url_for('cityplan_controller.index'))
 
         return render_template('schedule.html', data=data)
+    
+    def printItinerary():
+        data = {}
+
+        # Error if no code is in param
+        if request.args.get('code') is None or not validUuid4(request.args.get('code')) :
+            flash("Please generate an itinerary as one has not been generated for you yet")
+            return redirect(url_for('cityplan_controller.index'))
+
+        code  = request.args.get('code')
+        data["days"] = getItineraryDays(code)
+        data["hotel"] = getItineraryHotel(code)
+
+        # Error if days is was not found
+        if data["days"] is None:
+            flash("Itinerary code is not valid")
+            return redirect(url_for('cityplan_controller.index'))
+
+        return render_template('print_schedule.html', data=data)
 
 
     @login_required
