@@ -1,6 +1,6 @@
 # TravelBlueprint
 > [!WARNING]  
-> THIS PRODUCT IS IN EARLY ALPHA AND SHOULD NOT BE USED IN PRODUCTION
+> THIS PRODUCT IS IN BETA AND SHOULD NOT BE USED IN PRODUCTION
 
 An easy to use travel itinerary generator
 
@@ -24,11 +24,11 @@ $ flask init-db
 #Run Application
 $ flask run --debug
 ```
-In flask, Default port is `5000`
+Please note only 2 cities have proper test data.
 
 ### Run flask for production
 > [!IMPORTANT]  
-> App has not been tested in production and not yet ready for widespread use as still in alpha.
+> App has not been tested in production and not yet ready for widespread use as still in beta.
 
 Please refer to the following for info for deploying a flask application.
 

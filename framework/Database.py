@@ -38,8 +38,12 @@ def init_db():
 @click.command("init-db")
 def init_db_command():
     """Clear existing data and create new tables."""
-    init_db()
-    click.echo("Initialized the database.")
+    #Prompt user for confirmation
+    if input("Would you like to delete and reinitilize database? ").lower() == 'y':
+        init_db()
+        click.echo("Initialized the database.")
+    else:
+        click.echo("Failed confirmation no changes made.")
 
 
 def init_app(app):

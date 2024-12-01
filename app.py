@@ -6,6 +6,8 @@ import config
 
 def create_app():
     #Start the app..
+    print("Web server starting...")
+
     app = Flask(__name__, static_url_path='/', 
                         static_folder=config.STATIC_DIR,
                         template_folder=config.VIEWS_DIR)

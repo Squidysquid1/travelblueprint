@@ -91,36 +91,34 @@ INSERT INTO FAQ
 VALUES (2, 'Does it cost anything?', 'We are currently in an open beta to get the most amount of feedback possible. We plan to move to a more sustainable payment model if we receive positive feedback.'); 
 
 INSERT INTO FAQ
-VALUES (3, 'test1', 'asdasd'); 
+VALUES (3, 'Where can I contact you?', 'Exe@virusinjector.zip would be the best place to start as our 24/7 staff will get to your request as soon as possible'); 
 
-INSERT INTO FAQ
-VALUES (4, 'test2', 'adsafsjfsakfas;');
 -- END FAQ TEST DATA
 
 -- BEGIN City TEST DATA
 INSERT INTO City
-VALUES (1, 'Krakow', 'Poland', '/img/countries/poland/krakow/card_icon.jpg', 'Experience a land of wonder!');
+VALUES (1, 'Krakow', 'Poland', '/img/countries/poland/krakow/card_icon.jpg', 'One of the largest and oldest cities in Poland!');
 
 INSERT INTO City
-VALUES (2, 'Warsaw', 'Poland', '/img/countries/poland/warsaw/card_icon.jpg', 'Experience a land of wonder!');
+VALUES (2, 'Warsaw', 'Poland', '/img/countries/poland/warsaw/card_icon.jpg', 'Warning: Test Data not finished');
 
 INSERT INTO City
-VALUES (3, 'Yosemite', 'USA', '/img/countries/usa/yosemite/card_icon.jpg', 'Experience a land of wonder!');
+VALUES (3, 'Yosemite', 'USA', '/img/countries/usa/yosemite/card_icon.jpg', 'Warning: Test Data not finished');
 
 INSERT INTO City
-VALUES (4, 'London', 'United Kingdom', '/img/countries/united_kingdom/london/card_icon.jpg', 'Experience a land of wonder!');
+VALUES (4, 'London', 'United Kingdom', '/img/countries/united_kingdom/london/card_icon.jpg', 'Experience one of the most popular cities in the UK!');
 
 INSERT INTO City
-VALUES (5, 'Berlin', 'Germany', '/img/countries/germany/berlin/card_icon.webp', 'Experience a land of wonder!');
+VALUES (5, 'Berlin', 'Germany', '/img/countries/germany/berlin/card_icon.webp', 'Warning: Test Data not finished');
 
 INSERT INTO City
-VALUES (6, 'Oslo', 'Norway', '/img/countries/norway/oslo/card_icon.png', 'Experience a land of wonder!');
+VALUES (6, 'Oslo', 'Norway', '/img/countries/norway/oslo/card_icon.png', 'Warning: Test Data not finished');
 
 INSERT INTO City
-VALUES (7, 'Paris', 'France', '/img/countries/france/paris/card_icon.jpg', 'Experience a land of wonder!');
+VALUES (7, 'Paris', 'France', '/img/countries/france/paris/card_icon.jpg', 'Warning: Test Data not finished');
 
 INSERT INTO City
-VALUES (8, 'Rome', 'Italy', '/img/countries/italy/rome/card_icon.jpg', 'Experience a land of wonder!');
+VALUES (8, 'Rome', 'Italy', '/img/countries/italy/rome/card_icon.jpg', 'Warning: Test Data not finished');
 -- END City TEST DATA
 
 
@@ -146,9 +144,9 @@ VALUES (6, 3, 'Hotel 2', "country", '#', 0, 'insert desc', '#');
 
 --London
 INSERT INTO Hotel
-VALUES (7, 4, 'Hotel 1', "city", '#', 1, 'insert desc', '#');
+VALUES (7, 4, 'The Tower Hotel', "city", 'https://www.thistle.com/the-tower', 1, "The Tower Hotel, London, is a stunning hotel overlooking Tower Bridge, offering an unrivalled view of one of the city's most iconic landmarks. Nestled along the banks of the River Thames, this exceptional location places you at the heart of London’s rich history and vibrant atmosphere.", 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d51382.32860526443!2d-0.15238949317586437!3d51.49967503546539!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876034824cbc437%3A0xcb55e6ff166d412c!2sThe%20Tower%20Hotel!5e1!3m2!1sen!2sus!4v1733027165511!5m2!1sen!2sus');
 INSERT INTO Hotel
-VALUES (8, 4, 'Hotel 2', "country", '#', 0, 'insert desc', '#');
+VALUES (8, 4, 'Hilton London Wembley', "country", 'https://www.hilton.com/en/hotels/lonlwhi-hilton-london-wembley/', 0, 'Hotel with 2 restaurants, steps from OVO Arena Wembley', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3207.3133758171803!2d-0.2853537873542172!3d51.557585206917715!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487613d55aa57001%3A0x911c58046bdfbd6b!2sHilton%20London%20Wembley!5e1!3m2!1sen!2sus!4v1733027043724!5m2!1sen!2sus');
 
 --Berlin
 INSERT INTO Hotel
@@ -204,86 +202,86 @@ VALUES
 --Warsaw
 INSERT INTO ItineraryEvent
 VALUES
-(18, 2, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'),
-(19, 2, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'), 
-(20, 2, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'),
-(21, 2, 'Site4 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'), 
-(22, 2, 'Site5 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'), 
-(23, 2, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'),
-(24, 2, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc', '#'),
-(25, 2, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc', '#');
+(18, 2, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc', ''),
+(19, 2, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc', ''), 
+(20, 2, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc', ''),
+(21, 2, 'Site4 Name', 'Guided Tours', '#', 180, 0, 'insert desc', ''), 
+(22, 2, 'Site5 Name', 'Guided Tours', '#', 180, 0, 'insert desc', ''), 
+(23, 2, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc', ''),
+(24, 2, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc', ''),
+(25, 2, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc', '');
 
 --Yosemite
 INSERT INTO ItineraryEvent
 VALUES
-(26, 3, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'), 
-(27, 3, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'), 
-(28, 3, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'),
-(29, 3, 'Site4 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'), 
-(30, 3, 'Site5 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'), 
-(31, 3, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'),
-(32, 3, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc', '#'),
-(33, 3, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc', '#');
+(26, 3, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc', ''), 
+(27, 3, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc', ''), 
+(28, 3, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc', ''),
+(29, 3, 'Site4 Name', 'Guided Tours', '#', 180, 0, 'insert desc', ''), 
+(30, 3, 'Site5 Name', 'Guided Tours', '#', 180, 0, 'insert desc', ''), 
+(31, 3, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc', ''),
+(32, 3, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc', ''),
+(33, 3, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc', '');
 
 --London
 INSERT INTO ItineraryEvent
 VALUES
-(34, 4, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'), 
-(35, 4, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'), 
-(36, 4, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'),
-(37, 4, 'Site4 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'), 
-(38, 4, 'Site5 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'), 
-(39, 4, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'),
-(40, 4, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc', '#'),
-(41, 4, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc', '#');
+(34, 4, 'The London Eye', 'Exploring', 'https://www.londoneye.com/', 60, 0, 'Ride on an iconic ferris wheel!', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d44428.881270934595!2d-0.1592552715111505!3d51.50636320523251!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604c7be3d9791%3A0x67bb55b5c4867f8c!2sLondon%20Eye%20Ticket%20Office!5e1!3m2!1sen!2sus!4v1733029136406!5m2!1sen!2sus'), 
+(35, 4, 'Big Ben & Tower Bridge', 'Exploring', 'https://www.parliament.uk/bigben/', 120, 0, '16-storey Gothic clocktower and national symbol at the Eastern end of the Houses of Parliament.', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3211.321024415322!2d-0.12720568735672913!3d51.50073251107226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604c38c8cd1d9%3A0xb78f2474b9a45aa9!2sBig%20Ben!5e1!3m2!1sen!2sus!4v1733029260090!5m2!1sen!2sus'), 
+(36, 4, 'Stonehenge', 'Exploring', 'https://www.english-heritage.org.uk/visit/places/stonehenge/?utm_source=Google%20Business&utm_campaign=Local%20Listings&utm_medium=Google%20Business%20Profiles&utm_content=stonehenge&utm_source=Google%20Business&utm_campaign=Local%20Listings&utm_medium=Google%20Business%20Profiles&utm_content=stonehenge', 300, 0, 'Go look at neat rocks!', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3211.321024415322!2d-0.12720568735672913!3d51.50073251107226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4873e63b850af611%3A0x979170e2bcd3d2dd!2sStonehenge!5e1!3m2!1sen!2sus!4v1733029422329!5m2!1sen!2sus'),
+(37, 4, 'Westminster Abbey', 'Guided Tours', 'https://www.westminster-abbey.org/', 180, 0, 'Today it is still a church dedicated to regular worship and to the celebration of great events in the life of the nation.', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3211.2762936745885!2d-0.14447028735667122!3d51.50136731102594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604c359914745%3A0x700da0b0ccd9ee00!2sWestminster%20Abbey%2C%20Deans%20Yard%2C%20London%20SW1P%203PA%2C%20UK!5e1!3m2!1sen!2sus!4v1733029957956!5m2!1sen!2sus'), 
+(38, 4, 'Buckingham Palace', 'Guided Tours', 'https://www.rct.uk/visit/buckingham-palace', 180, 0, 'Buckingham Palace is recognised around the world as the home of the monarch, the focus of national and royal celebrations, as well as the backdrop to the regular Changing the Guard ceremony.', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3211.2762936745885!2d-0.14447028735667122!3d51.50136731102594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48760520cd5b5eb5%3A0xa26abf514d902a7!2sBuckingham%20Palace!5e1!3m2!1sen!2sus!4v1733029840024!5m2!1sen!2sus'), 
+(39, 4, 'Historical boat tour', 'Guided Tours', 'https://www.cityexperiences.com/london/city-cruises/24h-hop-on-hop-off-river-pass/', 180, 0, 'go in a boat and go with the flow!', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26306698.28398693!2d-37.03765221564608!3d51.50150090000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604c42e7e340b%3A0xa0c700f87873079e!2sWestminster%20Millennium%20Pier!5e1!3m2!1sen!2sus!4v1733029775513!5m2!1sen!2sus'),
+(40, 4, 'Barbican Conservatory', 'Relaxing', 'https://www.barbican.org.uk/whats-on/2024/event/visit-the-conservatory', 180, 0, 'Look at cool trees and stuff weirdo...', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3209.96273381102!2d-0.09574238735585021!3d51.52000630966435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761caa036cfde1%3A0x8deeedcd900573b6!2sBarbican%20Conservatory!5e1!3m2!1sen!2sus!4v1733029618687!5m2!1sen!2sus'),
+(41, 4, 'Richmond Park', 'Relaxing', 'https://www.royalparks.org.uk/visit/parks/richmond-park', 120, 0, 'Be at one with nature at the historic Richmond Park, which has been a Royal Park for more than 400 years. Enjoy the landscape, hills and woodland gardens set among ancient trees. See London’s wildlife right at home in this spacious, beautiful park.', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3215.5150116818127!2d-0.27711228735929255!3d51.44118831541997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48760ea56197d1fd%3A0x138cbe1a5a3a048d!2sRichmond%20Park!5e1!3m2!1sen!2sus!4v1733029531028!5m2!1sen!2sus');
 
 --Berlin
 INSERT INTO ItineraryEvent
 VALUES
-(42, 5, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'),
-(43, 5, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'), 
-(44, 5, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'),
-(45, 5, 'Site4 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'), 
-(46, 5, 'Site5 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'), 
-(47, 5, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'),
-(48, 5, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc', '#'),
-(49, 5, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc', '#');
+(42, 5, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc', ''),
+(43, 5, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc', ''), 
+(44, 5, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc', ''),
+(45, 5, 'Site4 Name', 'Guided Tours', '#', 180, 0, 'insert desc', ''), 
+(46, 5, 'Site5 Name', 'Guided Tours', '#', 180, 0, 'insert desc', ''), 
+(47, 5, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc', ''),
+(48, 5, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc', ''),
+(49, 5, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc', '');
 
 --Oslo
 INSERT INTO ItineraryEvent
 VALUES
-(50, 6, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'), 
-(51, 6, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'), 
-(52, 6, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'),
-(53, 6, 'Site4 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'), 
-(54, 6, 'Site5 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'), 
-(55, 6, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'),
-(56, 6, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc', '#'),
-(57, 6, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc', '#');
+(50, 6, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc', ''), 
+(51, 6, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc', ''), 
+(52, 6, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc', ''),
+(53, 6, 'Site4 Name', 'Guided Tours', '#', 180, 0, 'insert desc', ''), 
+(54, 6, 'Site5 Name', 'Guided Tours', '#', 180, 0, 'insert desc', ''), 
+(55, 6, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc', ''),
+(56, 6, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc', ''),
+(57, 6, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc', '');
 
 --Paris
 INSERT INTO ItineraryEvent
 VALUES
-(58, 7, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'), 
-(59, 7, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'), 
-(60, 7, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'),
-(61, 7, 'Site4 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'), 
-(62, 7, 'Site5 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'), 
-(63, 7, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'),
-(64, 7, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc', '#'),
-(65, 7, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc', '#');
+(58, 7, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc', ''), 
+(59, 7, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc', ''), 
+(60, 7, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc', ''),
+(61, 7, 'Site4 Name', 'Guided Tours', '#', 180, 0, 'insert desc', ''), 
+(62, 7, 'Site5 Name', 'Guided Tours', '#', 180, 0, 'insert desc', ''), 
+(63, 7, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc', ''),
+(64, 7, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc', ''),
+(65, 7, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc', '');
 
 --Rome
 INSERT INTO ItineraryEvent
 VALUES
-(66, 8, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'),
-(67, 8, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'), 
-(68, 8, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc', '#'),
-(69, 8, 'Site4 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'), 
-(70, 8, 'Site5 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'), 
-(71, 8, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc', '#'),
-(72, 8, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc', '#'),
-(73, 8, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc', '#');
+(66, 8, 'Site1 Name', 'Exploring', '#', 180, 0, 'insert desc', ''),
+(67, 8, 'Site2 Name', 'Exploring', '#', 180, 0, 'insert desc', ''), 
+(68, 8, 'Site3 Name', 'Exploring', '#', 180, 0, 'insert desc', ''),
+(69, 8, 'Site4 Name', 'Guided Tours', '#', 180, 0, 'insert desc', ''), 
+(70, 8, 'Site5 Name', 'Guided Tours', '#', 180, 0, 'insert desc', ''), 
+(71, 8, 'Site6 Name', 'Guided Tours', '#', 180, 0, 'insert desc', ''),
+(72, 8, 'Site7 Name', 'Relaxing', '#', 180, 0, 'insert desc', ''),
+(73, 8, 'Site8 Name', 'Relaxing', '#', 180, 0, 'insert desc', '');
 
 -- END ItineraryEvent TEST DATA
 
