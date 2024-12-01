@@ -63,11 +63,15 @@ class ItineraryController:
         days = int(form['days'])
         city = getCity(form['city'])
         uniqueCode = uuid.uuid4()
+
+        # get all hotels for the selected choice and get a random one from that list
         hotels = [hotel for hotel in getHotels(city['name']) if hotel['location_pref'] == form['living_preference']]
         hotel = random.choice(hotels)
+
+        # add an itinerary and get the id to use in all events
         itinerary_id = addItinerary(g.user['user_id'], city['city_id'], hotel['hotel_id'], uniqueCode)
 
-        
+        # Get all relaxed events
         relaxedSites = getEvents(city['name'], "Relaxing")
         sites = [event for event in getEvents(city['name']) if event not in relaxedSites]
         specialEvents = getSpecialEvents()
@@ -117,7 +121,7 @@ class ItineraryController:
         return redirect(url_for('itinerary_controller.index', code=uniqueCode))
 
 
-# validate form
+# is validate form
 def validForm(formDict):
     if "city" not in formDict:
         return False
@@ -128,6 +132,7 @@ def validForm(formDict):
 
     return True
 
+# is valid uuid
 def validUuid4(uuid4):
     UUID_PATTERN = re.compile(r'^[\da-f]{8}-([\da-f]{4}-){3}[\da-f]{12}$', re.IGNORECASE)
 
@@ -158,7 +163,7 @@ def createRange(start_time, minutes_to_add):
 
     return start_time.strftime("%I:%M%p") + " - " + new_time.strftime("%I:%M%p")
 
-
+# finds a special event in a list of events 
 def findSpecialEvent(events, id):
     for event in events:
         if event['event_id'] == id:
