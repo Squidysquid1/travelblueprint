@@ -53,6 +53,7 @@ class ItineraryController:
 
     @login_required
     def createItinerary():
+        """Creates an Itinerary and redirects user after it is created."""
         #Flash error if form not valid and redirect
         form = request.form.to_dict()
 
@@ -123,6 +124,8 @@ class ItineraryController:
 
 # is validate form
 def validForm(formDict):
+    """Checks if the survey form has all needed valid elements and returns true if so"""
+    
     if "city" not in formDict:
         return False
     if "days" not in formDict and formDict['days'] not in range(3,6):
@@ -132,8 +135,9 @@ def validForm(formDict):
 
     return True
 
-# is valid uuid
+
 def validUuid4(uuid4):
+    """Checks if valid UUID and returns true if so"""
     UUID_PATTERN = re.compile(r'^[\da-f]{8}-([\da-f]{4}-){3}[\da-f]{12}$', re.IGNORECASE)
 
     return bool(UUID_PATTERN.match(uuid4))
@@ -163,8 +167,9 @@ def createRange(start_time, minutes_to_add):
 
     return start_time.strftime("%I:%M%p") + " - " + new_time.strftime("%I:%M%p")
 
-# finds a special event in a list of events 
+
 def findSpecialEvent(events, id):
+    """Finds and returns a special event in a list of events. If none is found None is returned"""
     for event in events:
         if event['event_id'] == id:
             return event
